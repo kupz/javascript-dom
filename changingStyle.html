@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Activity</title>
+  </head>
+
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      row-gap: 2rem;
+      align-items: center;
+    }
+    .sample1,
+    .sample2,
+    .sample3 {
+      border: 1px solid black;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      width: 500px;
+    }
+  </style>
+  <body>
+    <div class="sample1">
+      <h1>😂</h1>
+      <button id="btn1" onmouseover="myFunctionOne()">Click me</button>
+    </div>
+    <div class="sample2">
+      <h1 id="sample2"></h1>
+      <button id="btn2">increment</button>
+    </div>
+
+    <div class="sample3">
+      <h1 id="displayInput1"></h1>
+      <input type="text" id="input1" />
+    </div>
+
+    <div class="sample3" id="copyCat">
+      <h1>Do not copy this text</h1>
+      <p id="copyText">Lorem ipsum dolor sit.</p>
+    </div>
+
+    <div class="sample3" id="changeBG">
+      <h1>pick a background color</h1>
+      <input type="color" id="colorPicker" />
+    </div>
+
+    <div class="sample3" id="changeBG">
+      <h1>simple addition</h1>
+      <input type="number" id="num1" />
+      <input type="number" id="num2" />
+      <h2 id="addResult">result here</h2>
+    </div>
+    <script>
+      const num1 = document.querySelector("#num1");
+      const num2 = document.querySelector("#num2");
+      const addResult = document.querySelector("#addResult");
+      let firstNumber = 0;
+      let secondNumber = 0;
+      function calculate() {
+        const result = parseInt(firstNumber) + parseInt(secondNumber);
+        addResult.textContent = result;
+      }
+      function updateNum1(e) {
+        firstNumber = e.target.value;
+        calculate();
+      }
+      function updateNum2(e) {
+        secondNumber = e.target.value;
+        calculate();
+      }
+      num1.addEventListener("input", updateNum1);
+      num2.addEventListener("input", updateNum2);
+    </script>
+    <script>
+      const colorPicker = document.querySelector("#colorPicker");
+      const changeBG = document.querySelector("#changeBG");
+      function changeBackground(e) {
+        changeBG.style.background = e.target.value;
+      }
+      colorPicker.addEventListener("change", changeBackground);
+    </script>
+    <script>
+      btn1 = document.getElementById("btn1");
+      let toggleValue = 1;
+      function myFunctionOne() {
+        if (toggleValue === 1) {
+          btn1.style.transform = "translate(-100%)";
+          toggleValue = 0;
+        } else {
+          btn1.style.transform = "translate(100%)";
+          toggleValue = 1;
+        }
+      }
+    </script>
+
+    <script>
+      const btn2 = document.getElementById("btn2");
+      const sample2 = document.getElementById("sample2");
+      let counter = 0;
+
+      sample2.innerHTML = counter;
+
+      function updateCounter() {
+        counter += 1;
+        sample2.innerHTML = counter;
+      }
+      btn2.addEventListener("click", updateCounter);
+    </script>
+
+    <script>
+      const displayInput1 = document.getElementById("displayInput1");
+      const input1 = document.getElementById("input1");
+      let data = "Type below";
+      displayInput1.textContent = data;
+      function updateDisplay(e) {
+        data = e.target.value;
+        displayInput1.textContent = data;
+        if (e.target.value.length === 0) {
+          displayInput1.textContent = "Type below";
+        }
+      }
+      input1.addEventListener("input", updateDisplay);
+    </script>
+
+    <script>
+      const copyCat = document.querySelector("#copyCat");
+      const copyText = document.querySelector("#copyText");
+      function doNotCopy() {
+        copyText.textContent = "dont copy here";
+        copyText.style.color = "red";
+      }
+      copyCat.addEventListener("copy", doNotCopy);
+    </script>
+  </body>
+</html>
